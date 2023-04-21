@@ -1,0 +1,100 @@
+import java.util.Scanner;
+import java.math.*;
+
+import static java.lang.Math.pow;
+
+public class Main{
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+    //选择题
+       System.out.println("选择题的答案为:   1,B   2,B    3,D    4,A    5,B");
+    //______编程(打印三角)
+        System.out.println("请输入一个数(打印三角)");
+        int n = scanner.nextInt();
+        showTriangle(n);
+    //______编程2(颠倒字符串)
+        System.out.println("请输入原字符串(颠倒字符串)");
+        String s = scanner.next();
+        reverseString(s);
+    //______编程3(回⽂数判断)
+        System.out.println("请输入需要判断的数(回⽂数判断))");
+        int num = scanner.nextInt();
+        isPalindrome(num);
+    //______编程4(水仙花数判断)
+        ShuiXianHua();
+    //______编程5(编写程序计算一个包含10个整数的数组中所包含元素的最小值和最大值之和)
+        int arr[] = new int[10];
+        System.out.println("请输入10个整数(将计算出最大值与最小值的和)");
+        for(int i = 0 ; i <10 ; i++){
+               arr[i] = scanner.nextInt();
+           }
+        arraysDemo(arr);
+
+    }
+    public static void showTriangle(int n){
+        int i , j;
+        for(i = 0 ; i < n ;i++){
+            for(j= 0 ; j < n-i-1 ; j++)
+                System.out.print(' ');
+            for(j=0 ; j < 2*i+1 ; j++)
+                System.out.print('*');
+            System.out.println("\n");
+        }
+    }
+    public static void reverseString(String s) {
+        //用数组完成 转换工具见下
+        int i;
+        char temp;
+        char[] chars = s .toCharArray();//字符串转化为字符数组
+        for(i=0;i < chars.length/2;i++){
+            temp = chars[i];
+            chars[i] = chars[chars.length-i-1];
+            chars[chars.length-i-1] = temp;
+        }
+        String s1 = String.valueOf(chars);//字符数组转化为字符串
+        //在此打印结果
+        System.out.println(s1) ;
+    }
+    public static void isPalindrome(int num) {
+        boolean flag = true;
+        int num2 = 0 , k;
+        int t = num;
+        while(num!=0){
+            k = num%10;
+            num2 = num2*10 + k;
+            num/=10;
+        }
+        if(num2!=t){
+            flag = false;
+        }
+        if (flag) {
+            System.out.println("是的") ; } else
+            System.out.println("不是") ; }
+    public static void ShuiXianHua() { //思考哪些数是水仙花
+        int single,tens,hundreds;
+        System.out.println("以下是三位数的水仙花数");
+        for(int i = 100;i<1000;i++){
+            single = i%10;
+            tens = i%100/10;
+            hundreds = i/100;
+            if(pow(single,3)+pow(tens,3)+pow(hundreds,3)==i)
+                System.out.print(i+" ");
+        }
+    }
+    public static void arraysDemo(int arr[]) { //操作
+        int j,temp;
+        for(int i = 0 ; i< 9;i++){
+            for(j = i+1;j < 10;j++){
+                if(arr[i]>arr[j]){
+                    temp = arr[i];
+                    arr[i] = arr[j];
+                    arr[j] = temp;
+                }
+            }
+        }
+        int sum = arr[0]+arr[9];
+        System.out.println("打印两个最值分别为"+arr[0]+" "+arr[9]+"\n"+"它们的和为："+sum);
+
+
+    }
+}
